@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by WarhearT on 02.09.2020.
@@ -19,7 +20,7 @@ public class MyLinkedList<T> implements Iterable<T> {
     Pair<T> last;
 
 
-    public T add(T elem) {
+    public void add(T elem) {
         Pair<T> pair;
 
         if (size == 0) {
@@ -30,10 +31,9 @@ public class MyLinkedList<T> implements Iterable<T> {
             pair = new Pair<T>(null, last, elem);
             last.setNextVal(pair);
             first.setNextVal(last);
-            last = (pair);
+            last = pair;
         }
         size++;
-        return pair.getValue();
     }
 
     @Override
@@ -60,25 +60,29 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     private class MyIterator implements Iterator<T> {
 
-        private int actualIndex = 0;
+        private int actualIndex = -1;
+        private Pair<T> actualPair = first;
+
 
         public boolean hasNext() {
-            return actualIndex < getSize();
+            return actualIndex < getSize() - 1;
         }
 
         public T next() {
 
-            Pair<T> pair = first;
 
-            actualIndex++;
-            int i = 1;
+            if (!hasNext())
+                throw new NoSuchElementException();
 
-            while (i < actualIndex) {
-                pair = pair.getNextVal();
-                i++;
+            if (actualIndex == -1) {
+                actualIndex++;
+                return actualPair.getValue();
             }
 
-            return pair.getValue();
+            actualPair = actualPair.getNextVal();
+            actualIndex++;
+            return actualPair.getValue();
+
         }
 
 

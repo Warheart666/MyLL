@@ -13,15 +13,15 @@ public class Main {
         list.add("3333");
         System.out.println(list.toString());
 
-        Iterator<String> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            String s = iterator.next();
-            System.out.println();
-            if (s.equalsIgnoreCase("2222")){
-                iterator.remove();
-            }
-        }
-        System.out.println(list);
+//        Iterator<String> iterator = list.iterator();
+//        while (iterator.hasNext()) {
+//            String s = iterator.next();
+//            System.out.println();
+//            if (s.equalsIgnoreCase("2222")){
+//                iterator.remove();
+//            }
+//        }
+//        System.out.println(list);
 //        LinkedList<String> strings = new LinkedList<String>();
 //        strings.add("qwe");
 //        strings.add("2222");
